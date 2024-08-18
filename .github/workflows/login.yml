@@ -2,27 +2,38 @@ name: 定时登录serv00
 
 on:
   workflow_dispatch:
-  #去掉下方前面的#定时生效
+  #去掉下方前面的#定时生效，只能一个定时任务
   #schedule:
-    #- cron: '0 */4 * * *'  # 每4小时执行一次，UTC 时间
+    #- cron: '0 */4 * * *'  # 每UTC 时间4小时执行一次
+  schedule:
+    - cron: '0 4 */2 * *'  # 每两天的UTC 时间04点执行一次，北京时间中午十二点
+    
 env:
   TZ: Asia/Shanghai
+  
 jobs:
   run-login:
     runs-on: ubuntu-latest 
     steps:
+      
       - name: 检查仓库
         uses: actions/checkout@v4
+     
       - name: ssh登录
         run: |
           #定义需要通过ssh执行的命令
           #vnt="pgrep -x 'vnts' > /dev/null || /home/${{ secrets.USER1 }}/tool/vnts -p 29870 "
           vnt="ps"
           #执行ssh登录后并执行上方定义的命令，其中PASSWORD是github的环境变量 对应 USER1表示用户名的密码
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "$vnt ; exit"
+          #sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "$vnt ; exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "exit"
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER2 }}@s4.serv00.com "exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER3 }}@s4.serv00.com "exit"
           
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s1.ct8.pl "$vnt ; exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s1.ct8.pl "exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER4 }}@s1.ct8.pl "exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER5 }}@s1.ct8.pl "exit"
+      
       - name: 登录面板
         run: |
           login_and_check() {
@@ -61,10 +72,15 @@ jobs:
           fi
           }
 
-          # 执行登录 方式为：login_and_check 帐号 网站
-          login_and_check "${{ secrets.USER1 }}" "https://panel.ct8.pl"                                                                                                                     
+          # 执行登录 方式为：login_and_check 帐号 网站                                                                                                                  
           login_and_check "${{ secrets.USER1 }}" "https://panel4.serv00.com"                                                                                                              
-          login_and_check "${{ secrets.USER2 }}" "https://panel4.serv00.com"                                                                                                                 
+          login_and_check "${{ secrets.USER2 }}" "https://panel4.serv00.com"  
+          login_and_check "${{ secrets.USER3 }}" "https://panel4.serv00.com"
+
+          login_and_check "${{ secrets.USER1 }}" "https://panel.ct8.pl" 
+          login_and_check "${{ secrets.USER4 }}" "https://panel.ct8.pl" 
+          login_and_check "${{ secrets.USER5 }}" "https://panel.ct8.pl" 
+          
       -  name: 删除工作流
          uses: GitRML/delete-workflow-runs@main
          with:
