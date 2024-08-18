@@ -16,6 +16,7 @@ jobs:
       - name: ssh登录
         run: |
           #定义需要通过ssh执行的命令
+          #vnt="pgrep -x 'vnts' > /dev/null || /home/${{ secrets.USER1 }}/tool/vnts -p 29870 "
           vnt="ps"
           #执行ssh登录后并执行上方定义的命令，其中PASSWORD是github的环境变量 对应 USER1表示用户名的密码
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "$vnt ; exit"
