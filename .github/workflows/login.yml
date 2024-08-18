@@ -1,0 +1,66 @@
+name: 定时登录serv00
+
+on:
+  workflow_dispatch:
+  #去掉下方前面的#定时生效
+  #schedule:
+    #- cron: '0 */4 * * *'  # 每4小时执行一次，UTC 时间
+env:
+  TZ: Asia/Shanghai
+jobs:
+  run-login:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: 检查仓库
+        uses: actions/checkout@v4
+      - name: ssh登录
+        run: |
+          #定义需要通过ssh执行的命令
+          vnt="pgrep -x 'vnts' > /dev/null || /home/${{ secrets.USER1 }}/tool/vnts -p 29870 "
+          #执行ssh登录后并执行上方定义的命令，其中PASSWORD是github的环境变量 对应 USER1表示用户名的密码
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "$vnt ; exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER2 }}@s4.serv00.com "exit"
+          
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s1.ct8.pl "$vnt ; exit"
+      - name: 登录面板
+        run: |
+          login_and_check() {
+          username=$1
+          panel_url=$2
+
+          #抓取页面内容和响应头，并保存到变量 response 中
+          response=$(curl -Lksi "$panel_url/login/")
+
+          #抓取页面内容中的csrfmiddlewaretoken值
+          csrfmiddlewaretoken=$(echo "$response" | sed -n 's/.*<input type="hidden" name="csrfmiddlewaretoken" value="\([^"]*\)".*/\1/p' | head -n 1)
+          echo -e "\033[36;1mcsrfmiddlewaretoken=\033[0m\033[35;1m$csrfmiddlewaretoken \033[0m"
+
+          #抓取Set-Cookie中的csrftoken值
+          csrftoken=$(echo "$response" | sed -n 's/.*csrftoken=\([^;]*\);.*/\1/p')
+          echo -e "\033[36;1mcsrftoken=\033[0m\033[35;1m$csrftoken \033[0m"
+
+          # 登录账号获取 sessionid 值
+          sessionid=$(curl -ksi "$panel_url/login/" -X POST \
+          -H "Referer: $panel_url/login/" \
+          -H "Cookie: csrftoken=$csrftoken" \
+          -d "csrfmiddlewaretoken=$csrfmiddlewaretoken&username=$username&password=${{ secrets.SSH_PRIVATE_KEY }} | \
+          grep -i 'sessionid=' | \
+          sed -n 's/.*sessionid=\([^;]*\);.*/\1/p')
+          echo -e "\033[36;1msessionid=\033[0m\033[35;1m$sessionid \033[0m"
+
+          # 登录面板并检查状态
+          status=$(curl -ks "$panel_url"  \
+          -H 'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0' \
+          -H 'Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2' \
+          -H "Cookie: csrftoken=${csrftoken}; sessionid=$sessionid" | grep -o "MySQL")
+          if [ ! -z "$status" ]; then
+          echo -e "\033[36;1m$(date "+%G-%m-%d %H:%M:%S") ：\033[0m\033[35;1m$username $panel_url 签到保活成功！ \033[0m"
+          else
+          echo -e "\033[36;1m$(date "+%G-%m-%d %H:%M:%S") ：\033[0m\033[35;1m$username $panel_url 失败了请检查！ \033[0m"
+          fi
+          }
+
+          # 执行登录 方式为：login_and_check 帐号 网站
+          login_and_check "${{ secrets.USER1 }}" "https://panel.ct8.pl"                                                                                                                     
+          login_and_check "${{ secrets.USER1 }}" "https://panel4.serv00.com"                                                                                                              
+          login_and_check "${{ secrets.USER2 }}" "https://panel4.serv00.com"                                                                                                                 
