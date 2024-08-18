@@ -65,3 +65,9 @@ jobs:
           login_and_check "${{ secrets.USER1 }}" "https://panel.ct8.pl"                                                                                                                     
           login_and_check "${{ secrets.USER1 }}" "https://panel4.serv00.com"                                                                                                              
           login_and_check "${{ secrets.USER2 }}" "https://panel4.serv00.com"                                                                                                                 
+      -  name: 删除工作流
+         uses: GitRML/delete-workflow-runs@main
+         with:
+           token: ${{ secrets.GITHUB_TOKEN }}
+           retain_days: 1
+           keep_minimum_runs: 1
