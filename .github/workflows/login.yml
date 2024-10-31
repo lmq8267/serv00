@@ -78,7 +78,7 @@ jobs:
           login_and_check "${{ secrets.USER3 }}" "https://panel4.serv00.com"
 
           login_and_check "${{ secrets.USER1 }}" "https://panel.ct8.pl" 
-          login_and_check "${{ secrets.USER4 }}" "https://panel.ct8.pl" 
+          #login_and_check "${{ secrets.USER4 }}" "https://panel.ct8.pl" 
           login_and_check "${{ secrets.USER5 }}" "https://panel.ct8.pl" 
           
       -  name: 删除工作流
