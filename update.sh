@@ -199,7 +199,7 @@ if [ ! -z "$merlintag" ] && [ ! -d "./vnt-cli/梅林离线安装包/${merlintag}
     echo "开始更新vnt梅林离线安装包 $merlintag"
     mkdir -p ./梅林离线安装包/${merlintag}
     curl_wget "./梅林离线安装包/${merlintag}/vnt-koolshare.tar.gz" "https://github.com/lmq8267/vnt-merlin/releases/download/${merlintag}/vnt-koolshare.tar.gz"
-    curl_wget "./梅林离线安装包/${merlintag}/vnt-koolshare.tar.gz" "https://github.com/lmq8267/vnt-merlin/releases/download/${merlintag}/vnt-SWRT.tar.gz"
+    curl_wget "./梅林离线安装包/${merlintag}/vnt-SWRT.tar.gz" "https://github.com/lmq8267/vnt-merlin/releases/download/${merlintag}/vnt-SWRT.tar.gz"
     cd ../
 fi
 
@@ -208,7 +208,7 @@ netlinktag=$(get_tag "rustp2p/NetLink")
 if [ ! -z "$netlinktag" ] && [ ! -d "./netlink/${merlintag}" ] ; then
     cd ./netlink
     echo "开始更新netlink $netlinktag"
-    mkdir -p ./netlink/${netlinktag}
+    mkdir -p ${netlinktag}
     curl_wget "./netlink/${netlinktag}/netlink-aarch64-apple-darwin.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-aarch64-apple-darwin-${netlinktag}.tar.gz"
     curl_wget "./netlink/${netlinktag}/netlink-aarch64-pc-windows-msvc.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-aarch64-pc-windows-msvc-${netlinktag}.tar.gz"
     curl_wget "./netlink/${netlinktag}/netlink-aarch64-unknown-linux-musl.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-aarch64-unknown-linux-musl-${netlinktag}.tar.gz"
