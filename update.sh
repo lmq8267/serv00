@@ -205,7 +205,7 @@ fi
 
 [ ! -d ./netlink ] && mkdir -p ./netlink
 netlinktag=$(get_tag "rustp2p/NetLink")
-if [ ! -z "$netlinktag" ] && [ ! -d "./netlink/${merlintag}" ] ; then
+if [ ! -z "$netlinktag" ] && [ ! -d "./netlink/${netlinktag}" ] ; then
     cd ./netlink
     echo "开始更新netlink $netlinktag"
     mkdir -p ${netlinktag}
