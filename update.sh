@@ -21,15 +21,15 @@ get_tag() {
 curl_wget() {
   filename=$1
   url=$2
-  echo "开始下载 $filename  链接地址 $url"
-  curl -Lko "$filename" "$url" || wget --no-check-certificate -O "$filename" "$url" || echo "下载${url}失败！"
+  echo -e "\n\033[0;35m开始下载 \033[0;32m$filename \n\033[0;35m 链接地址 \033[0;32m$url \033[0m"
+  curl -Lko "$filename" "$url" || wget --no-check-certificate -O "$filename" "$url" || echo -e "\n\033[0;31m下载\033[0;36m${url}\033[0;31m失败！\033[0m"
 }
 
 [ ! -d ./zerotier ] && mkdir -p zerotier
 zttag=$(get_tag "lmq8267/ZeroTierOne")
 if [ ! -z "$zttag" ] && [ ! -d "./zerotier/${zttag}" ] ; then
     cd ./zerotier
-    echo "开始更新ZeroTier $zttag"
+    echo -e "\n\033[0;35m开始更新ZeroTier \033[0;32m$zttag  \033[0m"
     mkdir -p ${zttag}
     curl_wget "./${zttag}/zerotier-arm7l-etc.tar.gz" "https://github.com/lmq8267/ZeroTierOne/releases/download/${zttag}/zerotier-arm7l-etc.tar.gz"
     curl_wget "./${zttag}/zerotier-arm7l-opt.tar.gz" "https://github.com/lmq8267/ZeroTierOne/releases/download/${zttag}/zerotier-arm7l-opt.tar.gz"
@@ -42,7 +42,7 @@ fi
 vntstag=$(get_tag "lmq8267/vnts")
 if [ ! -z "$vntstag" ] && [ ! -d "./vnts/${vntstag}" ] ; then
     cd ./vnts
-    echo "开始更新vnts $vntstag"
+    echo -e "\n\033[0;35m开始更新vnts \033[0;32m$vntstag  \033[0m"
     mkdir -p ${vntstag}
     curl_wget "./${vntstag}/vnts_aarch64-unknown-linux-musl" "https://github.com/lmq8267/vnts/releases/download/${vntstag}/vnts_aarch64-unknown-linux-musl"
     curl_wget "./${vntstag}/vnts_arm-unknown-linux-musleabi" "https://github.com/lmq8267/vnts/releases/download/${vntstag}/vnts_arm-unknown-linux-musleabi"
@@ -59,7 +59,7 @@ fi
 vnttag=$(get_tag "lmq8267/vnt-cli")
 if [ ! -z "$vnttag" ] && [ ! -d "./vnt-cli/${vnttag}" ] ; then
     cd ./vnt-cli
-    echo "开始更新vnt-cli $vnttag"
+    echo -e "\n\033[0;35m开始更新vnt-cli \033[0;32m$vnttag  \033[0m"
     mkdir -p ${vnttag}
     curl_wget "./${vnttag}/vnt-cli-386-docker.tar" "https://github.com/lmq8267/vnt-cli/releases/download/${vnttag}/vnt-cli-386-docker.tar"
     curl_wget "./${vnttag}/vnt-cli-arm64-docker.tar" "https://github.com/lmq8267/vnt-cli/releases/download/${vnttag}/vnt-cli-arm64-docker.tar"
@@ -85,7 +85,7 @@ fi
 easytiertag=$(get_tag "lmq8267/easytier")
 if [ ! -z "$easytiertag" ] && [ ! -d "./easytier/${easytiertag}" ] ; then
     cd ./easytier
-    echo "开始更新easytier $easytiertag"
+    echo -e "\n\033[0;35m开始更新easytier \033[0;32m$easytiertag  \033[0m"
     mkdir -p ${easytiertag}
     curl_wget "./${easytiertag}/app-universal-release.apk" "https://github.com/EasyTier/EasyTier/releases/download/${easytiertag}/app-universal-release.apk"
     curl_wget "./${easytiertag}/easytier-freebsd-13.2-x86_64.zip" "https://github.com/EasyTier/EasyTier/releases/download/${easytiertag}/easytier-freebsd-13.2-x86_64-${easytiertag}.zip"
@@ -113,7 +113,7 @@ fi
 tailscaletag=$(get_tag "lmq8267/tailscale")
 if [ ! -z "$tailscaletag" ] && [ ! -d "./tailscale/${tailscaletag}" ] ; then
     cd ./tailscale
-    echo "开始更新tailscale $tailscaletag"
+    echo -e "\n\033[0;35m开始更新tailscale \033[0;32m$tailscaletag  \033[0m"
     mkdir -p ${tailscaletag}
     curl_wget "./${tailscaletag}/derper-mipsel" "https://github.com/lmq8267/tailscale/releases/download/${tailscaletag}/derper"
     curl_wget "./${tailscaletag}/tailscaled_full-mipsel" "https://github.com/lmq8267/tailscale/releases/download/${tailscaletag}/tailscaled_full"
@@ -126,7 +126,7 @@ fi
 cloudflaredtag=$(get_tag "lmq8267/cloudflared")
 if [ ! -z "$cloudflaredtag" ] && [ ! -d "./cloudflared/${cloudflaredtag}" ] ; then
     cd ./cloudflared
-    echo "开始更新cloudflared $cloudflaredtag"
+    echo -e "\n\033[0;35m开始更新cloudflared \033[0;32m$cloudflaredtag  \033[0m"
     mkdir -p ${cloudflaredtag}
     curl_wget "./${cloudflaredtag}/cloudflared-mipsel" "https://github.com/lmq8267/cloudflared/releases/download/${cloudflaredtag}/cloudflared"
     cd ../
@@ -136,7 +136,7 @@ fi
 alisttag=$(get_tag "lmq8267/alist")
 if [ ! -z "$alisttag" ] && [ ! -d "./alist/${alisttag}" ] ; then
     cd ./alist
-    echo "开始更新alist $alisttag"
+    echo -e "\n\033[0;35m开始更新alist \033[0;32m$alisttag  \033[0m"
     mkdir -p ${alisttag}
     curl_wget "./${alisttag}/alist-mipsel-upx" "https://github.com/lmq8267/alist/releases/download/${alisttag}/alist"
     curl_wget "./${alisttag}/alist-mipsel-upx.tar.gz" "https://github.com/lmq8267/alist/releases/download/${alisttag}/alist.tar.gz"
@@ -148,7 +148,7 @@ fi
 caddytag=$(get_tag "lmq8267/caddy")
 if [ ! -z "$caddytag" ] && [ ! -d "./caddy/${caddytag}" ] ; then
     cd ./caddy
-    echo "开始更新caddy $caddytag"
+    echo -e "\n\033[0;35m开始更新caddy \033[0;32m$caddytag  \033[0m"
     mkdir -p ${caddytag}
     curl_wget "./${caddytag}/caddy-amd64" "https://github.com/lmq8267/caddy/releases/download/${caddytag}/caddy-amd64"
     curl_wget "./${caddytag}/caddy-amd64-upx" "https://github.com/lmq8267/caddy/releases/download/${caddytag}/caddy-amd64-upx"
@@ -175,7 +175,7 @@ fi
 iperf3tag=$(get_tag "lmq8267/iperf3")
 if [ ! -z "$iperf3tag" ] && [ ! -d "./iperf3/${iperf3tag}" ] ; then
     cd ./iperf3
-    echo "开始更新iperf3 $iperf3tag"
+    echo -e "\n\033[0;35m开始更新iperf3 \033[0;32m$iperf3tag   \033[0m"
     mkdir -p ${iperf3tag}
     curl_wget "./${iperf3tag}/iperf3-mipsel" "https://github.com/lmq8267/iperf3/releases/download/${iperf3tag}/iperf3_musl_mipsel"
     curl_wget "./${iperf3tag}/iperf3_musl_aarch64" "https://github.com/lmq8267/iperf3/releases/download/${iperf3tag}/iperf3_musl_aarch64"
@@ -186,7 +186,7 @@ fi
 opvnttag=$(get_tag "lmq8267/luci-app-vnt")
 if [ ! -z "$opvnttag" ] && [ ! -d "./vnt-cli/luci-app-vnt/${opvnttag}" ] ; then
     cd ./vnt-cli
-    echo "开始更新luci-app-vnt $opvnttag"
+    echo -e "\n\033[0;35m开始更新luci-app-vnt \033[0;32m$opvnttag   \033[0m"
     mkdir -p ./luci-app-vnt/${opvnttag}
     curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_all.ipk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_all.ipk"
     cd ../
@@ -196,7 +196,7 @@ fi
 merlintag=$(get_tag "lmq8267/luci-app-vnt")
 if [ ! -z "$merlintag" ] && [ ! -d "./vnt-cli/梅林离线安装包/${merlintag}" ] ; then
     cd ./vnt-cli
-    echo "开始更新vnt梅林离线安装包 $merlintag"
+    echo -e "\n\033[0;35m开始更新vnt梅林离线安装包 \033[0;32m$merlintag   \033[0m"
     mkdir -p ./梅林离线安装包/${merlintag}
     curl_wget "./梅林离线安装包/${merlintag}/vnt-koolshare.tar.gz" "https://github.com/lmq8267/vnt-merlin/releases/download/${merlintag}/vnt-koolshare.tar.gz"
     curl_wget "./梅林离线安装包/${merlintag}/vnt-SWRT.tar.gz" "https://github.com/lmq8267/vnt-merlin/releases/download/${merlintag}/vnt-SWRT.tar.gz"
@@ -207,7 +207,7 @@ fi
 netlinktag=$(get_tag "rustp2p/NetLink")
 if [ ! -z "$netlinktag" ] && [ ! -d "./netlink/${netlinktag}" ] ; then
     cd ./netlink
-    echo "开始更新netlink $netlinktag"
+    echo -e "\n\033[0;35m开始更新netlink \033[0;32m$netlinktag  \033[0m"
     mkdir -p ${netlinktag}
     curl_wget "./${netlinktag}/netlink-aarch64-apple-darwin.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-aarch64-apple-darwin-${netlinktag}.tar.gz"
     curl_wget "./${netlinktag}/netlink-aarch64-pc-windows-msvc.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-aarch64-pc-windows-msvc-${netlinktag}.tar.gz"
