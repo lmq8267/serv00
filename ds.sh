@@ -1,10 +1,9 @@
 #!/bin/sh
 
-#[ -z "$1" ] && echo -e "\n\033[0;31m请输入用户名\033[0m" && exit 1 
-
+[ -z "$1" ] && echo "请输入用户名" && exit 1 
 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 
-cd /usr/home/lmq8267/opt/caddy
+cd /usr/home/$1/opt/caddy
 
 get_tag() {
 	curltest=`which curl`
@@ -79,7 +78,6 @@ if [ ! -z "$vnttag" ] && [ ! -d "./vnt-cli/${vnttag}" ] ; then
     curl_wget "./${vnttag}/vnt-i686-pc-windows-msvc.tar.gz" "https://github.com/vnt-dev/vnt/releases/download/${vnttag}/vnt-i686-pc-windows-msvc-${vnttag}.tar.gz"
     curl_wget "./${vnttag}/vnt-x86_64-apple-darwin.tar.gz" "https://github.com/vnt-dev/vnt/releases/download/${vnttag}/vnt-x86_64-apple-darwin-${vnttag}.tar.gz"
     curl_wget "./${vnttag}/vnt-x86_64-pc-windows-msvc.tar.gz" "https://github.com/vnt-dev/vnt/releases/download/${vnttag}/vnt-x86_64-pc-windows-msvc-${vnttag}.tar.gz"
-    curl_wget "./${vnttag}/vnt-cli_synology_ds213j "https://github.com/lmq8267/vnt/releases/download/${vnttag}/vnt-cli_ds213j"
     cd ../
 fi
 
@@ -191,21 +189,6 @@ if [ ! -z "$opvnttag" ] && [ ! -d "./vnt-cli/luci-app-vnt/${opvnttag}" ] ; then
     echo -e "\n\033[0;35m开始更新luci-app-vnt \033[0;32m$opvnttag   \033[0m"
     mkdir -p ./luci-app-vnt/${opvnttag}
     curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_all.ipk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_all.ipk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_aarch64_cortex-a53_mediatek_filogic.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_aarch64_cortex-a53_mediatek_filogic.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_aarch64_cortex-a72_bcm27xx_bcm2711.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_aarch64_cortex-a72_bcm27xx_bcm2711.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_aarch64_cortex-a76_bcm27xx_bcm2712.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_aarch64_cortex-a76_bcm27xx_bcm2712.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_aarch64_generic_rockchip_armv8.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_aarch64_generic_rockchip_armv8.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_arm_arm1176jzf-s_vfp_bcm27xx_bcm2708.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_arm_arm1176jzf-s_vfp_bcm27xx_bcm2708.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_arm_cortex-a15_neon-vfpv4_ipq806x_generic.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_arm_cortex-a15_neon-vfpv4_ipq806x_generic.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_arm_cortex-a5_vfpv4_at91_sama5.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_arm_cortex-a5_vfpv4_at91_sama5.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_arm_cortex-a7_mediatek_mt7629.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_arm_cortex-a7_mediatek_mt7629.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_arm_cortex-a7_neon-vfpv4_ipq40xx_generic.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_arm_cortex-a7_neon-vfpv4_ipq40xx_generic.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_arm_cortex-a9_bcm53xx_generic.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_arm_cortex-a9_bcm53xx_generic.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_arm_cortex-a9_vfpv3-d16_mvebu_cortexa9.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_arm_cortex-a9_vfpv3-d16_mvebu_cortexa9.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_i386_pentium4_x86_generic.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_i386_pentium4_x86_generic.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_mipsel_24kc_ramips_mt7621.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_mipsel_24kc_ramips_mt7621.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_mips_24kc_ath79_nand.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_mips_24kc_ath79_nand.apk"
-    curl_wget "./luci-app-vnt/${opvnttag}/luci-app-vnt_x86_64_x86_64.apk" "https://github.com/lmq8267/luci-app-vnt/releases/download/${opvnttag}/luci-app-vnt_x86_64_x86_64.apk"
     cd ../
 fi
 
@@ -240,30 +223,5 @@ if [ ! -z "$netlinktag" ] && [ ! -d "./netlink/${netlinktag}" ] ; then
     curl_wget "./${netlinktag}/netlink-x86_64-pc-windows-msvc.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-x86_64-pc-windows-msvc-${netlinktag}.tar.gz"
     curl_wget "./${netlinktag}/netlink-x86_64-unknown-freebsd.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-x86_64-unknown-freebsd-${netlinktag}.tar.gz"
     curl_wget "./${netlinktag}/netlink-x86_64-unknown-linux-musl.tar.gz" "https://github.com/rustp2p/NetLink/releases/download/${netlinktag}/netlink-x86_64-unknown-linux-musl-${netlinktag}.tar.gz"
-    cd ../
-fi
-
-[ ! -d ./easytier/luci-app-easytier ] && mkdir -p ./easytier/luci-app-easytier
-opettag=$(get_tag "lmq8267/luci-app-easytier")
-if [ ! -z "$opettag" ] && [ ! -d "./easytier/luci-app-easytier/${opettag}" ] ; then
-    cd ./easytier
-    echo -e "\n\033[0;35m开始更新luci-app-easytier \033[0;32m$opettag   \033[0m"
-    mkdir -p ./luci-app-easytier/${opettag}
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_all.ipk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_all.ipk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_aarch64_cortex-a53_mediatek_filogic.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_aarch64_cortex-a53_mediatek_filogic.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_aarch64_cortex-a72_bcm27xx_bcm2711.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_aarch64_cortex-a72_bcm27xx_bcm2711.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_aarch64_cortex-a76_bcm27xx_bcm2712.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_aarch64_cortex-a76_bcm27xx_bcm2712.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_aarch64_generic_rockchip_armv8.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_aarch64_generic_rockchip_armv8.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_arm_arm1176jzf-s_vfp_bcm27xx_bcm2708.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_arm_arm1176jzf-s_vfp_bcm27xx_bcm2708.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_arm_cortex-a15_neon-vfpv4_ipq806x_generic.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_arm_cortex-a15_neon-vfpv4_ipq806x_generic.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_arm_cortex-a5_vfpv4_at91_sama5.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_arm_cortex-a5_vfpv4_at91_sama5.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_arm_cortex-a7_mediatek_mt7629.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_arm_cortex-a7_mediatek_mt7629.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_arm_cortex-a7_neon-vfpv4_ipq40xx_generic.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_arm_cortex-a7_neon-vfpv4_ipq40xx_generic.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_arm_cortex-a9_bcm53xx_generic.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_arm_cortex-a9_bcm53xx_generic.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_arm_cortex-a9_vfpv3-d16_mvebu_cortexa9.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_arm_cortex-a9_vfpv3-d16_mvebu_cortexa9.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_i386_pentium4_x86_generic.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_i386_pentium4_x86_generic.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_mipsel_24kc_ramips_mt7621.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_mipsel_24kc_ramips_mt7621.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_mips_24kc_ath79_nand.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_mips_24kc_ath79_nand.apk"
-    curl_wget "./luci-app-easytier/${opettag}/luci-app-easytier_x86_64_x86_64.apk" "https://github.com/lmq8267/luci-app-easytier/releases/download/${opettag}/luci-app-easytier_x86_64_x86_64.apk"
     cd ../
 fi
