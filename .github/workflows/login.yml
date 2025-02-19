@@ -30,7 +30,8 @@ jobs:
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER2 }}@s4.serv00.com "exit"
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER3 }}@s4.serv00.com "exit"
           
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s1.ct8.pl "exit"
+          sshpass -p "${{ secrets.PASSWORD }}" ssh -tt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.USER1 }}@s1.ct8.pl "ps; exit"
+
           #sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER4 }}@s1.ct8.pl "exit"
           #sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER5 }}@s1.ct8.pl "exit"
       
