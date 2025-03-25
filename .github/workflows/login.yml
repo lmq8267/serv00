@@ -27,8 +27,8 @@ jobs:
           #执行ssh登录后并执行上方定义的命令，其中PASSWORD是github的环境变量 对应 USER1表示用户名的密码
           #sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "$vnt ; exit"
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "exit"
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER2 }}@s4.serv00.com "exit"
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER3 }}@s4.serv00.com "exit"
+          #sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER2 }}@s4.serv00.com "exit"
+          #sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER3 }}@s4.serv00.com "exit"
           
           sshpass -p "${{ secrets.PASSWORD }}" ssh -tt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.USER1 }}@s1.ct8.pl "ps; exit"
 
@@ -75,8 +75,8 @@ jobs:
 
           # 执行登录 方式为：login_and_check 帐号 网站                                                                                                                  
           login_and_check "${{ secrets.USER1 }}" "https://panel4.serv00.com"                                                                                                              
-          login_and_check "${{ secrets.USER2 }}" "https://panel4.serv00.com"  
-          login_and_check "${{ secrets.USER3 }}" "https://panel4.serv00.com"
+          #login_and_check "${{ secrets.USER2 }}" "https://panel4.serv00.com"  
+          #login_and_check "${{ secrets.USER3 }}" "https://panel4.serv00.com"
 
           login_and_check "${{ secrets.USER1 }}" "https://panel.ct8.pl" 
           #login_and_check "${{ secrets.USER4 }}" "https://panel.ct8.pl" 
