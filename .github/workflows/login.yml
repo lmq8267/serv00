@@ -26,8 +26,8 @@ jobs:
           vnt="ps"
           #执行ssh登录后并执行上方定义的命令，其中PASSWORD是github的环境变量 对应 USER1表示用户名的密码
           #sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "$vnt ; exit"
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "${{ secrets.SHORTCMD }} ; ${{ secrets.CFCMD }} ; exit"
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER2 }}@s4.serv00.com "exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER1 }}@s4.serv00.com "exit"
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER2 }}@s4.serv00.com "${{ secrets.SHORTCMD }} ; ${{ secrets.CFCMD }} ; exit"
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -tt ${{ secrets.USER3 }}@s4.serv00.com "exit"
           
           sshpass -p "${{ secrets.PASSWORD }}" ssh -tt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.USER1 }}@s1.ct8.pl "ps; exit"
